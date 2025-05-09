@@ -21,7 +21,7 @@
             <a href="/BigProjects/Fullstack3Month/signup" class="btn btn-primary">Sign Up Free</a>
             <a href="/BigProjects/Fullstack3Month/login" class="btn btn-secondary">Log In</a>
         </div>
-        <p>No credit card required • Free plan available</p>
+        <p>No credit card requiredd • Free plan available</p>
     </div>
 </section>
 
