@@ -38,7 +38,7 @@ function getUsers(PDO $pdo, int $page = 1, int $itemsPerPage): array | string
 function deleteUser(PDO $pdo, int $id): bool|string
 {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $query = "DELETE FROM users WHERE id = :id";
+    $query = "DELETE FROM users WHERE user_id = :id";
     $prep = $pdo->prepare($query);
     $prep->bindValue(':id', $id, PDO::PARAM_INT);
     try {
@@ -53,5 +53,5 @@ function deleteUser(PDO $pdo, int $id): bool|string
 
 
 
-?>
+
 

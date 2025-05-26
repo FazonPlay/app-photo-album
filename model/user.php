@@ -3,7 +3,7 @@
 function getUser(PDO $pdo, int $id): array|string
 {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $query = "SELECT *  FROM users WHERE id = :id";
+    $query = "SELECT * FROM users WHERE user_id = :id";
     $prep = $pdo->prepare($query);
     $prep->bindValue(':id', $id, PDO::PARAM_INT);
     try {

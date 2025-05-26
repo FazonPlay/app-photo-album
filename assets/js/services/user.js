@@ -1,7 +1,8 @@
-export const createAccount = async (username, password) => {
+export const createAccount = async (username, email, password) => {
     const formData = new URLSearchParams();
     formData.append('username', username);
     formData.append('password', password);
+    formData.append('email', email);
     formData.append('action', 'create');
 
     const response = await fetch('index.php?component=create_user', {

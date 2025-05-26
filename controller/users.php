@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var PDO $pdo
+ */
 require "model/users.php";
 require "model/create_user.php";
 

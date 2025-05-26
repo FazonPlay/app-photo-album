@@ -3,31 +3,34 @@
  * @var PDO $pdo
  */
 require "model/login.php";
+registerCss("assets/css/create_user.css");
 
 
 if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest'
 ) {
+    error_log('POST data: ' . print_r($_POST, true));
+
     $errors = [];
-    $username = $_POST['username'] ?? null;
+    $email = $_POST['email'] ?? null;
     $password = $_POST['password'] ?? null;
 
-    if (null === $username || null === $password) {
+    if (null === $email || null === $password) {
         $errors[] = "The login or password is missing";
     } else {
-        $user = login($pdo, $username);
+        $user = login($pdo, $email);
 
         if (!$user) {
             $errors[] = "User not found";
         }
-        elseif (!password_verify($password, $user['password'])) {
-            $errors[] = "Invalid password";
-        } else {
+        elseif (!password_verify($password, $user['password_hash'])) { // use password_hash instead of password
+                $errors[] = "Invalid password";
+            } else {
             $_SESSION["auth"] = true;
             $_SESSION["username"] = $user['username'];
-            $_SESSION["is_admin"] = (bool)$user['is_admin'];
-            $_SESSION['user_id'] = $user['id'];
-
+            $_SESSION["role"] = $user['roles'];
+            $_SESSION["is_admin"] = ($user['roles'] === 'admin');
+            $_SESSION['user_id'] = $user['user_id']; // CORRECT - match database column name
             header("Content-Type: application/json");
             echo json_encode(['authentication' => true]);
             exit();
