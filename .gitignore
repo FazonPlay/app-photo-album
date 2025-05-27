@@ -1,7 +1,6 @@
 vendor/
 .idea/
-upload/
+uploads/
 .env
 Screenshot 2025-05-24 234828.png
 index_old.php
-database/

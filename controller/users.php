@@ -4,6 +4,11 @@
  */
 require "model/users.php";
 require "model/create_user.php";
+registerCss("./assets/css/admin.css");
+registerCss("./assets/css/style.css");
+registerCss("./assets/css/dashboard.css");
+
+
 
 $is_admin = $_SESSION["is_admin"] === true;
 

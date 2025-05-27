@@ -94,7 +94,6 @@ Once installed, open `index.php` to access the **dashboard**, where you’ll fin
 
 ## 📜 License
 📝 Open-source license (TBD)
-tttt
 
 ---
 ✨ *Thank you for checking out my project!* ✨
