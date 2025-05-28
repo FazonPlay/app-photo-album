@@ -2,6 +2,8 @@
 registerCss("assets/css/photos.css");
 require "model/photo.php";
 
+$users = getAllUsers($pdo);
+
 $errors = [];
 if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,7 +39,14 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH
         }
     } else {
         $page = intval($_GET['page'] ?? 1);
-        $result = getPhotos($pdo, $page, 20);
+        $userId = isset($_GET['user_id']) ? intval($_GET['user_id']) : null;
+
+        if ($userId) {
+            $result = getPhotosByUser($pdo, $userId, $page, 20);
+        } else {
+            $result = getPhotos($pdo, $page, 20);
+        }
+
         if (is_array($result)) {
             header('Content-Type: application/json');
             echo json_encode(['results' => $result['photos'], 'count' => $result['total']]);

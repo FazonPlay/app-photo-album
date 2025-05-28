@@ -1,6 +1,12 @@
 <div class="row">
     <div class="col">
         <h1 class="pt-2 pb-2 text-center">All Photos</h1>
+        <select id="user-select" class="form-select mb-3">
+            <option value="">All Users</option>
+            <?php foreach ($users as $user): ?>
+                <option value="<?php echo $user['user_id']; ?>"><?php echo htmlspecialchars($user['username']); ?></option>
+            <?php endforeach; ?>
+        </select>
         <form id="add-photo-form" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="photo-title" class="form-label">Title</label>
@@ -19,12 +25,19 @@
         </nav>
     </div>
 </div>
+
 <script src="./assets/js/services/photo.js" type="module"></script>
 <script src="./assets/js/components/photos.js" type="module"></script>
 <script type="module">
     import { refreshPhotoList, handleAddPhoto } from './assets/js/components/photos.js';
     document.addEventListener('DOMContentLoaded', () => {
         refreshPhotoList(1);
+
+        // User select event
+        document.getElementById('user-select').addEventListener('change', () => {
+            refreshPhotoList(1);
+        });
+
         handleAddPhoto();
     });
 </script>
